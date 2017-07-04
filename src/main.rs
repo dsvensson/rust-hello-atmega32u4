@@ -12,10 +12,10 @@ pub const F_CPU: u32 = 16_000_000 as u32;
 
 pub const DELAY_MS: u16 = (F_CPU / 4000) as u16;
 
-pub const DDRB:  *mut u16 = 0x24 as *mut u16;
-pub const PORTB:  *mut u16 = 0x25 as *mut u16;
-pub const DDRD:  *mut u16 = 0x2a as *mut u16;
-pub const PORTD:  *mut u16 = 0x2b as *mut u16;
+pub const DDRB:  *mut u8 = 0x24 as *mut u8;
+pub const PORTB:  *mut u8 = 0x25 as *mut u8;
+pub const DDRD:  *mut u8 = 0x2a as *mut u8;
+pub const PORTD:  *mut u8 = 0x2b as *mut u8;
 
 // http://www.nongnu.org/avr-libc/user-manual/group__util__delay__basic.html
 #[inline(always)]
@@ -37,13 +37,13 @@ pub fn delay_ms(ms: u16) {
     }
 }
 
-pub fn enable(addr: *mut u16, bit: u16) {
+pub fn enable(addr: *mut u8, bit: u8) {
     unsafe {
         write_volatile(addr, read_volatile(addr) | bit)
     }
 }
 
-pub fn disable(addr: *mut u16, bit: u16) {
+pub fn disable(addr: *mut u8, bit: u8) {
     unsafe {
         write_volatile(addr, read_volatile(addr) & !bit)
     }
